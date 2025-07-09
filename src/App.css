@@ -490,8 +490,12 @@ h3 {
 }
 
 .program-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(241, 196, 15, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(241, 196, 15, 0.2);
+}
+
+.program-card:hover .program-icon {
+  transform: scale(1.1);
 }
 
 .program-icon {
@@ -614,8 +618,12 @@ h3 {
 }
 
 .facility-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(241, 196, 15, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(241, 196, 15, 0.2);
+}
+
+.facility-item:hover img {
+  transform: scale(1.02);
 }
 
 .facility-item img {
@@ -950,9 +958,71 @@ html {
   }
 }
 
+/* Optimize existing animations */
 .program-card,
 .facility-item {
-  animation: fadeInUp 0.6s ease forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.program-icon,
+.facility-item img {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Simple fade-in animation for cards */
+@keyframes simpleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply simple animations */
+.program-card {
+  animation: simpleFadeIn 0.5s ease-out forwards;
+  animation-delay: calc(0.1s * var(--index, 0));
+}
+
+.facility-item {
+  animation: simpleFadeIn 0.5s ease-out forwards;
+  animation-delay: calc(0.1s * var(--index, 0));
+}
+
+/* Add staggered animation delays */
+.program-card:nth-child(1) {
+  --index: 1;
+}
+.program-card:nth-child(2) {
+  --index: 2;
+}
+.program-card:nth-child(3) {
+  --index: 3;
+}
+.program-card:nth-child(4) {
+  --index: 4;
+}
+.program-card:nth-child(5) {
+  --index: 5;
+}
+.program-card:nth-child(6) {
+  --index: 6;
+}
+
+.facility-item:nth-child(1) {
+  --index: 1;
+}
+.facility-item:nth-child(2) {
+  --index: 2;
+}
+.facility-item:nth-child(3) {
+  --index: 3;
 }
 
 /* Animation Keyframes */
